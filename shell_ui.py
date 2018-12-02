@@ -37,12 +37,12 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.pushButton_2.clicked['bool'].connect(lambda: self.pushButton_2.setDisabled(True))
-        self.pushButton_2.clicked['bool'].connect(lambda: self.pushButton.setEnabled(True))
-        self.pushButton.clicked['bool'].connect(lambda: self.pushButton.setDisabled(True))
-        self.pushButton.clicked['bool'].connect(lambda: self.pushButton_2.setEnabled(True))
-        self.pushButton.clicked['bool'].connect(lambda: self.secWaiting.setDisabled(True))
-        self.pushButton_2.clicked['bool'].connect(lambda: self.secWaiting.setEnabled(True))
+        # self.pushButton_2.clicked['bool'].connect(self.pushButton.setDisabled)
+        # self.pushButton_2.clicked['bool'].connect(self.pushButton_2.setEnabled)
+        # self.pushButton.clicked['bool'].connect(self.pushButton.setEnabled)
+        # self.pushButton.clicked['bool'].connect(self.pushButton_2.setDisabled)
+        # self.pushButton_2.clicked['bool'].connect(self.secWaiting.setDisabled)
+        # self.pushButton.clicked['bool'].connect(self.secWaiting.setEnabled)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
