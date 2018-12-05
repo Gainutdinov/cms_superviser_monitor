@@ -4,6 +4,7 @@ from shell_ui import Ui_MainWindow
 import os
 import sys
 from playsound import playsound
+import re
 
 
 
@@ -28,8 +29,8 @@ class MyThread(QtCore.QThread):
                 os.system('start "" "scripted_report.acsauto"')
                 self.sleep(10)
                 with open("report2.txt", 'r', encoding='cp1251') as file_handler:
-                    self.waitingTime = list(filter(str.isdigit, file_handler.readlines()[4]))
-                    if (int(''.join(self.waitingTime))>=30): # how much person waiting on the telephone line
+                    self.waitingTime = re.findall('\d+', file_handler.readlines()[6])
+                    if ( len (self.waitingTime)>=3 or    int(self.waitingTime[0])>=30): # how much person waiting on the telephone line
                         #print(int(''.join(self.waitingTime)))
                         if os.path.isfile(QtCore.QDir.current().absoluteFilePath(self.mp3FileName)): # if >= 30 seconds then play Notification.mp3
                             self.playMusic.emit()
@@ -39,7 +40,7 @@ class MyThread(QtCore.QThread):
                 # remove files after checking the attribute 'Вызовы в очереди'
                 os.remove(QtCore.QDir.current().absoluteFilePath('report.txt'))
                 os.remove(QtCore.QDir.current().absoluteFilePath('report2.txt'))
-                self.mySignal.emit(''.join(self.waitingTime))
+                self.mySignal.emit(str(self.waitingTime[0]))
                 print('Thread started!')
                 self.sleep(30)
             else:
