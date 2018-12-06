@@ -30,8 +30,9 @@ class MyThread(QtCore.QThread):
                 self.sleep(10)
                 with open("report2.txt", 'r', encoding='cp1251') as file_handler:
                     self.waitingTime = re.findall('\d+', file_handler.readlines()[6])
-                    if ( len (self.waitingTime)>=3 or    int(self.waitingTime[0])>=30): # how much person waiting on the telephone line
-                        print((self.waitingTime)[0])
+                    print(self.waitingTime)
+                    if (int((self.waitingTime)[0])>=30): # how much person waiting on the telephone line
+                        print((self.waitingTime))
                         if os.path.isfile(QtCore.QDir.current().absoluteFilePath(self.mp3FileName)): # if >= 30 seconds then play Notification.mp3
                             self.playMusic.emit()
                             #print('>=30 seconds')
