@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtWidgets, QtMultimedia
 from shell_ui import Ui_MainWindow
@@ -34,7 +35,8 @@ class MyThread(QtCore.QThread):
                     if (int((self.waitingTime)[0])>=30): # how much person waiting on the telephone line
                         print((self.waitingTime))
                         if os.path.isfile(QtCore.QDir.current().absoluteFilePath(self.mp3FileName)): # if >= 30 seconds then play Notification.mp3
-                            self.playMusic.emit()
+                            #self.playMusic.emit()
+                            os.system('cvlc --play-and-exit Notificaion.mp3')
                             #print('>=30 seconds')
                         else:
                             print('There is no ALERT Notificaion.mp3') # nothing to play
@@ -43,7 +45,8 @@ class MyThread(QtCore.QThread):
                 os.remove(QtCore.QDir.current().absoluteFilePath('report2.txt'))
                 self.mySignal.emit(str(self.waitingTime[0]))
                 print('Thread started!')
-                self.sleep(30)
+                os.system('taskkill /IM mspaint.exe')
+                self.sleep(20)
             else:
                 self.customSignal.emit('Error - File report.txt or scripted_report.acsauto were not found')
                 self.running = False
